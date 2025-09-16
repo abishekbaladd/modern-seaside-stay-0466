@@ -15,10 +15,10 @@ const About = () => {
   ];
 
   const achievements = [
-    { icon: Award, number: '15+', label: 'Years of Excellence' },
+    { icon: Award, number: '15+', label: t('yearsOfExcellence') },
     { icon: Users, number: '500+', label: t('clientsServed') },
     { icon: TrendingUp, number: '98%', label: t('successRate') },
-    { icon: Award, number: '24/7', label: 'Client Support' },
+    { icon: Award, number: '24/7', label: t('clientSupport') },
   ];
 
   return (
@@ -26,9 +26,9 @@ const About = () => {
       {/* Header */}
       <section className="bg-legal-navy text-white py-20">
         <div className="container-max text-center px-4">
-          <h1 className="heading-lg mb-6">About Us</h1>
+          <h1 className="heading-lg mb-6">{t('aboutTitle')}</h1>
           <p className="text-xl text-neutral-200 max-w-3xl mx-auto">
-            Your Trusted Legal Partner in Saudi Arabia
+            {t('aboutSubtitle')}
           </p>
         </div>
       </section>
@@ -42,21 +42,13 @@ const About = () => {
                 Ali Bin Fahad Law Firm & Intellectual Property LLC
               </h2>
               <p className="text-lg text-neutral-600 mb-6 leading-relaxed">
-                Ali Bin Fahad Law Firm & Intellectual Property LLC is a prestigious corporate law firm 
-                based in Saudi Arabia, dedicated to delivering world-class legal services to businesses 
-                and individuals. Renowned for our expertise in corporate law, business formation, 
-                intellectual property protection, and notary services, we empower clients to navigate 
-                Saudi Arabia's legal landscape with confidence and ease.
+                {t('aboutDescription1')}
               </p>
               <p className="text-lg text-neutral-600 mb-8 leading-relaxed">
-                Our firm is built on a foundation of integrity, excellence, and innovation, with a mission 
-                to provide customized legal solutions tailored to the specific needs of our clients. 
-                Whether you're establishing a business, safeguarding intellectual property, or seeking 
-                expert representation, we combine legal precision with a deep understanding of the 
-                Saudi market to help you succeed.
+                {t('aboutDescription2')}
               </p>
               <Button className="btn-outline">
-                Learn About Our Services
+                {t('learnAboutServices')}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>
@@ -81,9 +73,7 @@ const About = () => {
               </div>
               <h3 className="text-xl font-semibold text-legal-navy mb-4">{t('ourVision')}</h3>
               <p className="text-neutral-600 leading-relaxed">
-                To be the leading law firm in Saudi Arabia, recognized for our expertise, integrity, 
-                and commitment to delivering exceptional legal services that exceed client expectations 
-                and contribute to the development of the Kingdom's legal landscape.
+                {t('visionDescription')}
               </p>
             </div>
             
@@ -93,10 +83,7 @@ const About = () => {
               </div>
               <h3 className="text-xl font-semibold text-legal-navy mb-4">{t('ourMission')}</h3>
               <p className="text-neutral-600 leading-relaxed">
-                At Ali Bin Fahad Law Firm, our goal is to be the leading legal partner in Saudi Arabia, 
-                providing tailored and innovative solutions to businesses and individuals. We aim to 
-                deliver exceptional legal services that empower our clients to achieve their objectives 
-                while safeguarding their legal and financial interests.
+                {t('missionDescription')}
               </p>
             </div>
           </div>
@@ -109,10 +96,7 @@ const About = () => {
           <h2 className="heading-md text-legal-navy mb-8">{t('ourCommitment')}</h2>
           <div className="max-w-4xl mx-auto">
             <p className="text-lg text-neutral-600 mb-8 leading-relaxed">
-              Under the guidance of Ali Bin Fahad, our highly skilled team of lawyers and legal 
-              consultants delivers unparalleled legal support across all areas of corporate law. 
-              Our ability to adapt to the unique demands of each client ensures that your business 
-              objectives are met with efficiency, professionalism, and attention to detail.
+              {t('commitmentDescription')}
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -120,27 +104,27 @@ const About = () => {
                 <div className="bg-accent/10 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <Award className="h-6 w-6 text-accent" />
                 </div>
-                <h3 className="font-semibold text-legal-navy mb-2">Innovation</h3>
+                <h3 className="font-semibold text-legal-navy mb-2">{t('innovation')}</h3>
                 <p className="text-neutral-600 text-sm">
-                  Offering innovative legal solutions that align with Saudi regulations and international standards
+                  {t('innovationDesc')}
                 </p>
               </div>
               <div className="text-center">
                 <div className="bg-accent/10 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <Heart className="h-6 w-6 text-accent" />
                 </div>
-                <h3 className="font-semibold text-legal-navy mb-2">Partnership</h3>
+                <h3 className="font-semibold text-legal-navy mb-2">{t('partnership')}</h3>
                 <p className="text-neutral-600 text-sm">
-                  Building long-lasting partnerships with clients based on trust and results
+                  {t('partnershipDesc')}
                 </p>
               </div>
               <div className="text-center">
                 <div className="bg-accent/10 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <Users className="h-6 w-6 text-accent" />
                 </div>
-                <h3 className="font-semibold text-legal-navy mb-2">Protection</h3>
+                <h3 className="font-semibold text-legal-navy mb-2">{t('protection')}</h3>
                 <p className="text-neutral-600 text-sm">
-                  Ensuring your legal interests are protected while minimizing risks and maximizing opportunities
+                  {t('protectionDesc')}
                 </p>
               </div>
             </div>
@@ -154,7 +138,7 @@ const About = () => {
           <div className="text-center mb-12">
             <h2 className="heading-md text-legal-navy mb-6">{t('ourJourney')}</h2>
             <p className="text-xl text-neutral-600 max-w-3xl mx-auto">
-              Excellence Through Leadership and Expertise
+              {t('journeyDescription')}
             </p>
           </div>
           
@@ -179,7 +163,7 @@ const About = () => {
       {/* Achievements */}
       <section className="section-padding bg-legal-navy text-white">
         <div className="container-max text-center">
-          <h2 className="heading-md mb-12">Our Achievements</h2>
+          <h2 className="heading-md mb-12">{t('ourAchievements')}</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {achievements.map((achievement, index) => (
               <div key={index} className="text-center">

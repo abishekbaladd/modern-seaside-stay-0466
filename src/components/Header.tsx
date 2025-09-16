@@ -31,18 +31,12 @@ const Header = () => {
       <div className="container-max">
         <div className={`flex items-center justify-between h-20 px-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3">
-            <div className="bg-legal-navy text-white w-12 h-12 rounded-xl flex items-center justify-center font-bold text-xl">
-              A
-            </div>
-            <div className="hidden md:block">
-              <div className="text-legal-navy font-bold text-xl">
-                Ali Bin Fahad Law Firm
-              </div>
-              <div className="text-neutral-600 text-sm">
-                & Intellectual Property LLC
-              </div>
-            </div>
+          <Link to="/" className="flex items-center">
+            <img 
+              src="/src/assets/logo.png" 
+              alt="Ali Bin Fahad Law Firm & Intellectual Property LLC" 
+              className="h-12 w-auto max-w-[240px] object-contain"
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -116,7 +110,7 @@ const Header = () => {
               ))}
               <div className="px-4 py-3">
                 <Button className="btn-primary w-full">
-                  Schedule Consultation
+                  {t('scheduleConsultation')}
                 </Button>
               </div>
             </nav>
