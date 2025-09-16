@@ -73,16 +73,16 @@ const Home = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-4">
             {/* Left Side - Main Content */}
             <AnimatedSection animation="fadeInLeft" className="text-white">
-              <h1 className="heading-xl mb-8">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
                 {t('heroTitle')}
               </h1>
-              <div className="gold-accent text-2xl md:text-3xl font-semibold mb-8">
+              <div className="gold-accent text-xl md:text-2xl font-semibold mb-6">
                 {t('heroSubtitle')}
               </div>
-              <p className="text-xl text-neutral-200 mb-12 leading-relaxed">
+              <p className="text-lg text-neutral-200 mb-8 leading-relaxed">
                 {t('heroDescription')}
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 mb-16">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <Button className="btn-primary shadow-button hover:shadow-lg transition-all duration-300">
                   {t('scheduleConsultation')}
                   <ArrowRight className="ml-2 h-5 w-5" />
@@ -91,24 +91,10 @@ const Home = () => {
                   {t('ourServices')}
                 </Button>
               </div>
-              
-              {/* Stats with Animation */}
-              <div className="grid grid-cols-3 gap-8">
-                {stats.map((stat, index) => (
-                  <div key={index} className="text-center">
-                    <stat.icon className="h-8 w-8 text-accent mx-auto mb-2" />
-                    <AnimatedCounter 
-                      value={stat.number} 
-                      label={stat.label}
-                      duration={2000 + index * 200}
-                    />
-                  </div>
-                ))}
-              </div>
             </AnimatedSection>
 
             {/* Right Side - Professional Showcase */}
-            <AnimatedSection animation="fadeInRight" delay={200} className="hidden lg:block">
+            <AnimatedSection animation="fadeInRight" delay={200} className="hidden lg:block relative -mt-8">
               <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20">
                 <div className="text-center mb-8">
                   <div className="bg-accent/20 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4">
@@ -131,25 +117,24 @@ const Home = () => {
                     </div>
                   ))}
                 </div>
-                
-                <div className="mt-8 pt-8 border-t border-white/20">
-                  <div className="flex justify-between items-center">
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-accent">15+</div>
-                      <div className="text-xs text-neutral-300">Years</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-accent">500+</div>
-                      <div className="text-xs text-neutral-300">Clients</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-accent">98%</div>
-                      <div className="text-xs text-neutral-300">Success</div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </AnimatedSection>
+          </div>
+          
+          {/* Stats with Animation - Positioned at bottom */}
+          <div className="mt-16 px-4">
+            <div className="grid grid-cols-3 gap-8 max-w-lg">
+              {stats.map((stat, index) => (
+                <div key={index} className="text-center">
+                  <stat.icon className="h-8 w-8 text-accent mx-auto mb-2" />
+                  <AnimatedCounter 
+                    value={stat.number} 
+                    label={stat.label}
+                    duration={2000 + index * 200}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
