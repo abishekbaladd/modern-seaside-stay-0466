@@ -1,300 +1,239 @@
+import { useState } from 'react';
+import { MapPin, Phone, Mail, Clock, Send, Shield } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { useToast } from '@/hooks/use-toast';
 
-import { useState, useEffect } from "react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import { MapPin, Phone, Mail, Clock, Send, Check } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { useLanguage } from "@/contexts/LanguageContext";
-
-export default function Contact() {
-  const { t } = useLanguage();
+const Contact = () => {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    subject: "",
-    message: ""
+    fullName: '',
+    phone: '',
+    email: '',
+    subject: '',
+    message: '',
   });
-  
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  
-  useEffect(() => {
-    // Scroll to top when component mounts
-    window.scrollTo(0, 0);
-  }, []);
-  
+
+  const { toast } = useToast();
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
-  
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // In a real app, this would send the form data to a server
-    console.log("Form submitted:", formData);
-    
-    setIsSubmitted(true);
-    
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        subject: "",
-        message: ""
+    // Basic validation
+    if (!formData.fullName || !formData.email || !formData.message) {
+      toast({
+        title: "Missing Information",
+        description: "Please fill in all required fields.",
+        variant: "destructive",
       });
-    }, 3000);
+      return;
+    }
+
+    // Simulate form submission
+    toast({
+      title: "Message Sent Successfully",
+      description: "We'll get back to you within 24 hours.",
+    });
+
+    // Reset form
+    setFormData({
+      fullName: '',
+      phone: '',
+      email: '',
+      subject: '',
+      message: '',
+    });
   };
-  
+
+  const contactInfo = [
+    {
+      icon: MapPin,
+      title: 'Our Office',
+      details: [
+        'King Fahd Road',
+        'Al Olaya District',
+        'Riyadh 12213, Saudi Arabia'
+      ]
+    },
+    {
+      icon: Phone,
+      title: 'Phone',
+      details: ['+966 55 753 6255']
+    },
+    {
+      icon: Mail,
+      title: 'Email',
+      details: ['info@abf.sa', 'legal@abf.sa']
+    },
+    {
+      icon: Clock,
+      title: 'Business Hours',
+      details: [
+        'Sunday - Thursday: 8:00 AM - 6:00 PM',
+        'Friday - Saturday: Closed'
+      ]
+    }
+  ];
+
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      
-      <main className="flex-1 pt-20">
-        {/* Header Section */}
-        <section className="relative py-20 bg-gradient-to-r from-sea-light to-white dark:from-sea-dark dark:to-background overflow-hidden">
-          <div className="container relative z-10">
-            <div className="max-w-3xl mx-auto text-center animate-fade-in">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                {t.contact.title}
-              </h1>
-              <p className="text-muted-foreground text-lg mb-6">
-                {t.contact.subtitle}
-              </p>
-            </div>
-          </div>
-          
-          {/* Decorative elements */}
-          <div className="absolute top-0 right-0 w-1/3 h-full opacity-10">
-            <div className="absolute top-10 right-10 w-64 h-64 rounded-full bg-primary/50 blur-3xl" />
-            <div className="absolute bottom-10 right-40 w-48 h-48 rounded-full bg-sea-light blur-3xl" />
-          </div>
-        </section>
-        
-        {/* Contact Information & Form */}
-        <section className="section">
-          <div className="container">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              {/* Contact Information */}
-              <div className="animate-fade-in [animation-delay:100ms]">
-                <h2 className="text-2xl font-bold mb-6">{t.contact.getInTouch}</h2>
-                
-                <div className="glass-card p-6 space-y-6 mb-8">
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center mr-4">
-                      <MapPin className="h-5 w-5 text-primary" />
+    <div>
+      {/* Header */}
+      <section className="bg-legal-navy text-white py-20">
+        <div className="container-max text-center px-4">
+          <h1 className="heading-lg mb-6">Contact Us</h1>
+          <p className="text-xl text-neutral-200 max-w-3xl mx-auto">
+            Get in touch with our legal experts
+          </p>
+        </div>
+      </section>
+
+      <section className="section-padding bg-white">
+        <div className="container-max">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Contact Information */}
+            <div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                {contactInfo.map((info, index) => (
+                  <div key={index} className="text-center md:text-left">
+                    <div className="bg-accent/10 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto md:mx-0 mb-4">
+                      <info.icon className="h-8 w-8 text-accent" />
                     </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">{t.contact.address}</h3>
-                      <p className="text-muted-foreground">
-                        123 Seaside Boulevard<br />
-                        Costa Bella, 12345<br />
-                        Italy
-                      </p>
+                    <h3 className="text-lg font-semibold text-legal-navy mb-3">
+                      {info.title}
+                    </h3>
+                    <div className="space-y-1">
+                      {info.details.map((detail, detailIndex) => (
+                        <p key={detailIndex} className="text-neutral-600 text-sm">
+                          {detail}
+                        </p>
+                      ))}
                     </div>
                   </div>
-                  
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center mr-4">
-                      <Phone className="h-5 w-5 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">{t.contact.phone}</h3>
-                      <p className="text-muted-foreground">+39 123 4567 890</p>
-                      <p className="text-muted-foreground">+39 098 7654 321 (Reservations)</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center mr-4">
-                      <Mail className="h-5 w-5 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">{t.contact.email}</h3>
-                      <p className="text-muted-foreground">info@maresereno.com</p>
-                      <p className="text-muted-foreground">reservations@maresereno.com</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center mr-4">
-                      <Clock className="h-5 w-5 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">{t.contact.receptionHours}</h3>
-                      <p className="text-muted-foreground">
-                        Monday - Sunday: 24 hours<br />
-                        {t.contact.checkInTime}<br />
-                        {t.contact.checkOutTime}
-                      </p>
-                    </div>
+                ))}
+              </div>
+
+              {/* Security Notice */}
+              <div className="bg-blue-50 border border-blue-200 rounded-2xl p-6">
+                <div className="flex items-start space-x-3">
+                  <Shield className="h-6 w-6 text-blue-600 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold text-blue-900 mb-2">
+                      Secure & Confidential
+                    </h4>
+                    <p className="text-blue-700 text-sm leading-relaxed">
+                      All communications are protected by attorney-client privilege and 
+                      encrypted for your privacy and security.
+                    </p>
                   </div>
                 </div>
-                
-                <div className="aspect-video rounded-xl overflow-hidden">
-                  <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387191.03606358136!2d14.165818971864153!3d40.85529294646443!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133b0a3c328d896b%3A0x309e11f99628150!2sGulf%20of%20Naples!5e0!3m2!1sen!2sus!4v1628613152777!5m2!1sen!2sus" 
-                    width="100%" 
-                    height="100%" 
-                    style={{ border: 0 }} 
-                    allowFullScreen 
-                    loading="lazy"
-                    title="Location Map"
+              </div>
+            </div>
+
+            {/* Contact Form */}
+            <div className="bg-neutral-50 rounded-2xl p-8">
+              <h2 className="text-2xl font-semibold text-legal-navy mb-2">
+                Send us a Message
+              </h2>
+              <p className="text-neutral-600 mb-8">
+                Fill out the form below and we'll get back to you within 24 hours.
+              </p>
+
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-neutral-700 mb-2">
+                      Full Name *
+                    </label>
+                    <Input
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleInputChange}
+                      placeholder="Your full name"
+                      className="contact-input"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-neutral-700 mb-2">
+                      Phone Number
+                    </label>
+                    <Input
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      placeholder="+966 XX XXX XXXX"
+                      className="contact-input"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                    Email Address *
+                  </label>
+                  <Input
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder="your.email@example.com"
+                    className="contact-input"
+                    required
                   />
                 </div>
-              </div>
-              
-              {/* Contact Form */}
-              <div className="animate-fade-in [animation-delay:300ms]">
-                <h2 className="text-2xl font-bold mb-6">{t.contact.sendMessage}</h2>
-                
-                <div className="glass-card p-6">
-                  {!isSubmitted ? (
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <Label htmlFor="name">{t.contact.fullName}</Label>
-                          <Input 
-                            id="name" 
-                            name="name"
-                            value={formData.name}
-                            onChange={handleInputChange}
-                            placeholder="John Doe" 
-                            required 
-                          />
-                        </div>
-                        
-                        <div className="space-y-2">
-                          <Label htmlFor="email">{t.contact.email}</Label>
-                          <Input 
-                            id="email" 
-                            name="email"
-                            type="email"
-                            value={formData.email}
-                            onChange={handleInputChange}
-                            placeholder="john@example.com" 
-                            required 
-                          />
-                        </div>
-                      </div>
-                      
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <Label htmlFor="phone">{t.contact.phoneNumber}</Label>
-                          <Input 
-                            id="phone" 
-                            name="phone"
-                            value={formData.phone}
-                            onChange={handleInputChange}
-                            placeholder="+1 234 567 8900" 
-                          />
-                        </div>
-                        
-                        <div className="space-y-2">
-                          <Label htmlFor="subject">{t.contact.subject}</Label>
-                          <Input 
-                            id="subject" 
-                            name="subject"
-                            value={formData.subject}
-                            onChange={handleInputChange}
-                            placeholder="Reservation Inquiry" 
-                            required 
-                          />
-                        </div>
-                      </div>
-                      
-                      <div className="space-y-2">
-                        <Label htmlFor="message">{t.contact.message}</Label>
-                        <textarea 
-                          id="message" 
-                          name="message"
-                          value={formData.message}
-                          onChange={handleInputChange}
-                          placeholder={t.contact.howCanWeHelp} 
-                          className="w-full min-h-[150px] p-3 rounded-md border border-input bg-background"
-                          required 
-                        />
-                      </div>
-                      
-                      <Button type="submit" className="w-full btn-primary">
-                        <Send className="mr-2 h-4 w-4" />
-                        {t.contact.send}
-                      </Button>
-                    </form>
-                  ) : (
-                    <div className="text-center py-12">
-                      <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <Check className="h-8 w-8 text-green-600 dark:text-green-400" />
-                      </div>
-                      <h3 className="text-xl font-semibold mb-2">{t.contact.messageSent}</h3>
-                      <p className="text-muted-foreground mb-6">
-                        {t.contact.thankYou}
-                      </p>
-                    </div>
-                  )}
+
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                    Subject *
+                  </label>
+                  <Input
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleInputChange}
+                    placeholder="Brief description of your legal matter"
+                    className="contact-input"
+                    required
+                  />
                 </div>
-              </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                    Message *
+                  </label>
+                  <Textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    placeholder="Please provide details about your legal inquiry..."
+                    rows={5}
+                    className="contact-input resize-none"
+                    required
+                  />
+                </div>
+
+                <Button type="submit" className="w-full btn-primary">
+                  Send Message
+                  <Send className="ml-2 h-5 w-5" />
+                </Button>
+
+                <p className="text-xs text-neutral-500 text-center">
+                  By submitting this form, you agree to our privacy policy and consent to be 
+                  contacted regarding your inquiry.
+                </p>
+              </form>
             </div>
           </div>
-        </section>
-        
-        {/* FAQ Section */}
-        <section className="section bg-muted">
-          <div className="container">
-            <div className="max-w-3xl mx-auto text-center mb-12 animate-fade-in">
-              <h2 className="text-3xl font-bold mb-4">{t.contact.faq}</h2>
-              <p className="text-muted-foreground">
-                {t.contact.faqSubtitle}
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-fade-in [animation-delay:200ms]">
-              {[
-                {
-                  questionKey: "checkInOut",
-                  icon: <Clock className="h-5 w-5 text-primary" />
-                },
-                {
-                  questionKey: "parking",
-                  icon: <MapPin className="h-5 w-5 text-primary" />
-                },
-                {
-                  questionKey: "pets",
-                  icon: <MapPin className="h-5 w-5 text-primary" />
-                },
-                {
-                  questionKey: "breakfast",
-                  icon: <MapPin className="h-5 w-5 text-primary" />
-                },
-                {
-                  questionKey: "transfers",
-                  icon: <MapPin className="h-5 w-5 text-primary" />
-                },
-                {
-                  questionKey: "amenities",
-                  icon: <MapPin className="h-5 w-5 text-primary" />
-                },
-              ].map((faq, index) => (
-                <div key={index} className="glass-card p-6">
-                  <h3 className="font-semibold text-lg mb-2">
-                    {t.contact.questions[faq.questionKey].question}
-                  </h3>
-                  <p className="text-muted-foreground">
-                    {t.contact.questions[faq.questionKey].answer}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      </main>
-      
-      <Footer />
+        </div>
+      </section>
     </div>
   );
-}
+};
+
+export default Contact;

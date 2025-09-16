@@ -1,52 +1,80 @@
+import { Link } from 'react-router-dom';
+import { MapPin, Phone, Mail, Linkedin, Twitter, Instagram, Award, Shield, CheckCircle } from 'lucide-react';
 
-import { Link } from "react-router-dom";
-import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from "lucide-react";
-import { useLanguage } from "@/contexts/LanguageContext";
+const Footer = () => {
+  const quickLinks = [
+    { name: 'Home', href: '/' },
+    { name: 'Services', href: '/services' },
+    { name: 'Why Choose Us', href: '/why-choose-us' },
+    { name: 'Our Team', href: '/team' },
+    { name: 'Testimonials', href: '/testimonials' },
+    { name: 'Contact', href: '/contact' },
+  ];
 
-export default function Footer() {
-  const { t } = useLanguage();
-  const currentYear = new Date().getFullYear();
-  
+  const legalServices = [
+    { name: 'Company Formation', href: '/services/company-formation' },
+    { name: 'Litigation & Representation', href: '/services/litigation' },
+    { name: 'Bankruptcy & Debt Restructuring', href: '/services/bankruptcy' },
+    { name: 'Estate Liquidation', href: '/services/estate' },
+    { name: 'Trademark Services', href: '/services/trademark' },
+    { name: 'Legal Translation', href: '/services/translation' },
+  ];
+
+  const certifications = [
+    { name: 'Saudi Bar Association', icon: Award },
+    { name: 'Ministry of Justice', icon: Shield },
+    { name: 'SAIP Registered', icon: CheckCircle },
+    { name: 'ISO 9001:2015 Certified', icon: Award },
+  ];
+
   return (
-    <footer className="bg-card text-card-foreground pt-16 pb-8 border-t">
-      <div className="container">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          <div className="animate-fade-in [animation-delay:100ms]">
-            <h4 className="text-xl font-bold mb-4">MareSereno</h4>
-            <p className="text-muted-foreground mb-4">
-              {t.footer.description}
+    <footer className="bg-legal-navy text-white">
+      <div className="container-max section-padding">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+          {/* Firm Info */}
+          <div className="lg:col-span-1">
+            <div className="mb-6">
+              <h3 className="text-xl font-bold mb-2">Ali Bin Fahad Law Firm</h3>
+              <p className="text-accent text-sm font-medium">& Intellectual Property LLC</p>
+            </div>
+            <p className="text-neutral-300 mb-6 text-sm leading-relaxed">
+              Your trusted legal partner in Saudi Arabia, providing comprehensive 
+              legal solutions with excellence and integrity.
             </p>
-            <div className="flex space-x-4">
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                <Facebook size={20} />
-                <span className="sr-only">Facebook</span>
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                <Instagram size={20} />
-                <span className="sr-only">Instagram</span>
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                <Twitter size={20} />
-                <span className="sr-only">Twitter</span>
-              </a>
+            
+            {/* Contact Info */}
+            <div className="space-y-3">
+              <div className="flex items-start space-x-3">
+                <MapPin className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
+                <div className="text-sm text-neutral-300">
+                  <p>King Fahd Road, Al Olaya District,</p>
+                  <p>Riyadh 12213</p>
+                </div>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Phone className="h-5 w-5 text-accent flex-shrink-0" />
+                <a href="tel:+966557536255" className="text-sm text-neutral-300 hover:text-accent transition-colors">
+                  +966 55 753 6255
+                </a>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Mail className="h-5 w-5 text-accent flex-shrink-0" />
+                <a href="mailto:info@abf.sa" className="text-sm text-neutral-300 hover:text-accent transition-colors">
+                  info@abf.sa
+                </a>
+              </div>
             </div>
           </div>
-          
-          <div className="animate-fade-in [animation-delay:200ms]">
-            <h4 className="text-xl font-bold mb-4">{t.footer.quickLinks}</h4>
-            <ul className="space-y-2">
-              {[
-                { name: t.nav.home, path: "/" },
-                { name: t.nav.apartments, path: "/apartments" },
-                { name: t.nav.amenities, path: "/amenities" },
-                { name: t.nav.gallery, path: "/gallery" },
-                { name: t.nav.contact, path: "/contact" },
-                { name: t.nav.bookNow, path: "/booking" },
-              ].map((link) => (
+
+          {/* Quick Links */}
+          <div>
+            <h4 className="text-accent font-semibold mb-6">Quick Links</h4>
+            <ul className="space-y-3">
+              {quickLinks.map((link) => (
                 <li key={link.name}>
                   <Link 
-                    to={link.path} 
-                    className="text-muted-foreground hover:text-primary transition-colors"
+                    to={link.href} 
+                    className="text-sm text-neutral-300 hover:text-accent transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -54,55 +82,90 @@ export default function Footer() {
               ))}
             </ul>
           </div>
-          
-          <div className="animate-fade-in [animation-delay:300ms]">
-            <h4 className="text-xl font-bold mb-4">{t.footer.contact}</h4>
+
+          {/* Legal Services */}
+          <div>
+            <h4 className="text-accent font-semibold mb-6">Legal Services</h4>
             <ul className="space-y-3">
-              <li className="flex items-start">
-                <MapPin className="w-5 h-5 mr-2 mt-0.5 text-primary" />
-                <span className="text-muted-foreground">
-                  123 Seaside Boulevard<br />
-                  Costa Bella, 12345<br />
-                  Italy
-                </span>
-              </li>
-              <li className="flex items-center">
-                <Phone className="w-5 h-5 mr-2 text-primary" />
-                <span className="text-muted-foreground">+39 123 4567 890</span>
-              </li>
-              <li className="flex items-center">
-                <Mail className="w-5 h-5 mr-2 text-primary" />
-                <span className="text-muted-foreground">info@maresereno.com</span>
-              </li>
+              {legalServices.map((service) => (
+                <li key={service.name}>
+                  <Link 
+                    to={service.href} 
+                    className="text-sm text-neutral-300 hover:text-accent transition-colors"
+                  >
+                    {service.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
-          
-          <div className="animate-fade-in [animation-delay:400ms]">
-            <h4 className="text-xl font-bold mb-4">{t.footer.newsletter}</h4>
-            <p className="text-muted-foreground mb-4">
-              {t.footer.newsletterDesc}
-            </p>
-            <form className="flex flex-col space-y-2">
-              <input 
-                type="email" 
-                placeholder={t.footer.yourEmail} 
-                className="rounded-md px-4 py-2 bg-muted text-foreground"
-                required 
-              />
-              <button 
-                type="submit" 
-                className="btn-primary mt-2"
-              >
-                {t.footer.subscribe}
-              </button>
-            </form>
+
+          {/* Certifications & Social */}
+          <div>
+            <h4 className="text-accent font-semibold mb-6">Certifications</h4>
+            <ul className="space-y-3 mb-6">
+              {certifications.map((cert) => (
+                <li key={cert.name} className="flex items-center space-x-2">
+                  <cert.icon className="h-4 w-4 text-accent flex-shrink-0" />
+                  <span className="text-sm text-neutral-300">{cert.name}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div>
+              <h4 className="text-accent font-semibold mb-4">Follow Us</h4>
+              <div className="flex space-x-4">
+                <a 
+                  href="#" 
+                  className="p-2 bg-neutral-800 rounded-lg hover:bg-accent hover:text-white transition-colors"
+                  aria-label="LinkedIn"
+                >
+                  <Linkedin className="h-5 w-5" />
+                </a>
+                <a 
+                  href="#" 
+                  className="p-2 bg-neutral-800 rounded-lg hover:bg-accent hover:text-white transition-colors"
+                  aria-label="Twitter"
+                >
+                  <Twitter className="h-5 w-5" />
+                </a>
+                <a 
+                  href="#" 
+                  className="p-2 bg-neutral-800 rounded-lg hover:bg-accent hover:text-white transition-colors"
+                  aria-label="Instagram"
+                >
+                  <Instagram className="h-5 w-5" />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
-        
-        <div className="border-t border-border pt-8 mt-8 text-center text-muted-foreground">
-          <p>&copy; {currentYear} MareSereno. {t.footer.allRights}</p>
+
+        {/* Bottom Bar */}
+        <div className="border-t border-neutral-700 mt-12 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <p className="text-sm text-neutral-400">
+              © 2024 Ali Bin Fahad Law Firm & Intellectual Property LLC. All rights reserved.
+            </p>
+            <div className="flex space-x-6 text-sm">
+              <Link to="/privacy" className="text-neutral-400 hover:text-accent transition-colors">
+                Privacy Policy
+              </Link>
+              <Link to="/terms" className="text-neutral-400 hover:text-accent transition-colors">
+                Terms of Service
+              </Link>
+              <Link to="/cookies" className="text-neutral-400 hover:text-accent transition-colors">
+                Cookie Policy
+              </Link>
+              <span className="text-neutral-400 text-xs">
+                Licensed by Saudi Bar Association
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;
