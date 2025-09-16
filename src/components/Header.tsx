@@ -27,15 +27,15 @@ const Header = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <header className="bg-white shadow-lg sticky top-0 z-50 border-b border-neutral-100">
+    <header className="bg-white shadow-sm sticky top-0 z-50 border-b border-neutral-100/80 backdrop-blur-sm">
       <div className="container-max">
-        <div className={`flex items-center justify-between h-20 px-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
+        <div className={`flex items-center justify-between h-16 px-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
           {/* Logo */}
           <Link to="/" className="flex items-center">
             <img 
-              src="/src/assets/logo.png" 
+              src="/src/assets/logo-new.png" 
               alt="Ali Bin Fahad Law Firm & Intellectual Property LLC" 
-              className="h-12 w-auto max-w-[240px] object-contain"
+              className="h-10 w-auto max-w-[280px] object-contain"
             />
           </Link>
 

@@ -61,7 +61,7 @@ const Home = () => {
     <div>
       {/* Hero Section */}
       <section 
-        className="hero-section min-h-screen flex items-center pt-20"
+        className="hero-section h-[85vh] flex items-center pt-16"
         style={{
           backgroundImage: `url(${heroOffice})`,
           backgroundSize: 'cover',
@@ -159,7 +159,7 @@ const Home = () => {
         <section className="section-padding bg-white">
           <div className="container-max">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              <div>
+              <div className="flex flex-col">
                 <h2 className="heading-lg text-legal-navy mb-6">
                   Our Legal Excellence
                 </h2>
@@ -181,10 +181,12 @@ const Home = () => {
                     className="text-legal-navy"
                   />
                 </div>
-                <Button className="btn-outline hover:scale-105 transition-transform duration-300">
-                  {t('learnMore')}
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
+                <div className="flex justify-start">
+                  <Button className="btn-outline hover:scale-105 transition-transform duration-300">
+                    {t('learnMore')}
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </div>
               </div>
               <div className="relative">
                 <LazyImage 
@@ -210,14 +212,14 @@ const Home = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {coreValues.map((value, index) => (
                 <AnimatedSection key={index} animation="scaleIn" delay={index * 100}>
-                  <div className="card-premium text-center">
+                  <div className="card-premium text-center h-full flex flex-col">
                     <div className="bg-accent/10 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6">
                       <value.icon className="h-8 w-8 text-accent" />
                     </div>
                     <h3 className="text-xl font-semibold text-legal-navy mb-4">
                       {value.title}
                     </h3>
-                    <p className="text-neutral-600 leading-relaxed">
+                    <p className="text-neutral-600 leading-relaxed flex-grow">
                       {value.description}
                     </p>
                   </div>
@@ -230,7 +232,7 @@ const Home = () => {
 
       {/* Our Mission */}
       <AnimatedSection animation="fadeInUp">
-        <section className="section-padding bg-legal-navy text-white relative overflow-hidden">
+        <section className="section-padding bg-legal-navy text-white relative overflow-hidden mb-16">
           <div className="absolute inset-0 bg-gradient-to-br from-legal-navy via-legal-navy to-neutral-900"></div>
           <div className="container-max relative z-10 text-center">
             <h2 className="heading-lg mb-8">Our Mission</h2>
