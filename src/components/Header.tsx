@@ -64,21 +64,23 @@ const Header = () => {
 
           {/* Actions */}
           <div className={`flex items-center ${isRTL ? 'space-x-reverse space-x-4' : 'space-x-4'}`}>
-            {/* Language Toggle */}
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              className="hidden md:flex items-center space-x-1 hover:bg-accent/10 hover:text-accent transition-colors"
-              onClick={toggleLanguage}
-            >
-              <Globe className="h-4 w-4" />
-              <span className="text-sm font-medium">
-                {language === 'en' ? 'العربية' : 'English'}
-              </span>
-            </Button>
+            {/* Language Toggle with fixed width container to prevent layout shift */}
+            <div className="w-20 flex justify-center">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="hidden md:flex items-center space-x-1 hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:scale-105 w-auto px-2"
+                onClick={toggleLanguage}
+              >
+                <Globe className="h-4 w-4" />
+                <span className="text-sm font-medium transition-all duration-300">
+                  {language === 'en' ? 'عربي' : 'EN'}
+                </span>
+              </Button>
+            </div>
 
             {/* Schedule Consultation Button */}
-            <Button className="btn-primary hidden md:inline-flex shadow-button hover:shadow-lg transition-all duration-300">
+            <Button className="btn-primary hidden md:inline-flex shadow-button hover:shadow-lg transition-all duration-300 hover:scale-105">
               {t('scheduleConsultation')}
             </Button>
 
